@@ -182,16 +182,15 @@ window.onload = function () {
 };
 var Player = /** @class */ (function () {
     function Player() {
-        var _this = this;
-        this.add = function (score) {
-            _this._totalScore += score;
-            _this.scoreArr[_this._currBall] = score;
-            _this._currBall++;
-        };
         this.scoreArr = new Array(6);
         this._totalScore = 0;
         this._currBall = 0;
     }
+    Player.prototype.add = function (score) {
+        this._totalScore += score;
+        this.scoreArr[this._currBall] = score;
+        this._currBall++;
+    };
     Player.prototype.currBall = function () {
         return this._currBall;
     };
@@ -202,19 +201,7 @@ var Player = /** @class */ (function () {
 }());
 var cricketTeam = /** @class */ (function () {
     function cricketTeam() {
-        var _this = this;
         this.players = new Player()[10];
-        this.add = function (score) {
-            _this._totalScore += score;
-            if (_this.flag == true) {
-                _this.flag = false;
-                _this._currPlayer++;
-            }
-            _this.players[_this._currPlayer].add(score);
-            if (score == 0 || _this.players[_this._currPlayer].currBall() == 6) {
-                _this.flag = true;
-            }
-        };
         this.players = new Array(10);
         console.log(this.players);
         for (var ind = 0; ind < this.players.length; ind++) {
@@ -224,6 +211,17 @@ var cricketTeam = /** @class */ (function () {
         this.flag = false;
         this._totalScore = 0;
     }
+    cricketTeam.prototype.add = function (score) {
+        this._totalScore += score;
+        if (this.flag == true) {
+            this.flag = false;
+            this._currPlayer++;
+        }
+        this.players[this._currPlayer].add(score);
+        if (score == 0 || this.players[this._currPlayer].currBall() == 6) {
+            this.flag = true;
+        }
+    };
     cricketTeam.prototype.totalScore = function () {
         return this._totalScore;
     };
