@@ -192,7 +192,7 @@ class Player
         this._totalScore = 0;
         this._currBall = 0;
     }
-    add = (score:number):void =>{
+    add(score:number):void{
         this._totalScore += score;
         this.scoreArr[this._currBall] = score;
         this._currBall++;
@@ -219,7 +219,7 @@ class cricketTeam{
         this.flag = false;
         this._totalScore = 0;
     }
-    add = (score:number):void =>{
+    add(score:number):void{
         this._totalScore += score;
         if(this.flag == true){
             this.flag = false;
